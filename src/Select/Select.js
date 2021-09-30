@@ -131,6 +131,12 @@ class Select extends PureComponent {
 
   handleClickAway(e) {
     const desc = this.isDescendent(e.target, this.selectId)
+    // in label
+    if (e.path[1] && e.path[1].tagName === 'LABEL' && e.path[0].id === e.path[1].getAttribute('for')) {
+      if (e.path[1].contains(this.element)) {
+        return
+      }
+    }
     if (!desc) {
       if (!getParent(e.target, `[data-id=${this.selectId}]`)) {
         this.blured = true
